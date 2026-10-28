@@ -1,0 +1,504 @@
+/* ==========================================================================
+   «АУКЦИОН» — АНТИКВАРЛЫҚ ЖӘНЕ ЛЮКС ДИЗАЙН ЖҮЙЕСІ
+   Sotheby's, Christie's & Hôtel Drouot беделді сауда сарайларының стилі
+   Түстер: Корольдік бордо, Жаңғақ ағашы, Пергамент, Жылтыр алтын және Жез
+   ========================================================================== */
+
+:root {
+  /* Палитра: Асыл пергамент пен жылы крем */
+  --bg-cream-raw: #FAF6EE;
+  --bg-cream-soft: #F5EFE4;
+  --bg-cream-aged: #EADDC9;
+  --bg-parchment-border: #D8C5A8;
+
+  /* Палитра: Корольдік бордо және барқыт (Burgundy Velvet) */
+  --burgundy-black: #2A050A;
+  --burgundy-deep: #420A12;
+  --burgundy-royal: #5E101D;
+  --burgundy-crimson: #7C1827;
+  --burgundy-glow: rgba(124, 24, 39, 0.4);
+
+  /* Палитра: Бағалы жиһаз ағашы (Antique Walnut & Mahogany) */
+  --wood-ebony: #120906;
+  --wood-dark-walnut: #20100B;
+  --wood-mahogany: #341910;
+  --wood-warm: #4E271B;
+  --wood-carved: #663625;
+
+  /* Палитра: Жылтыр алтын, күйдірілген жез және шампан (Gold & Brass) */
+  --gold-pale: #FBF0D2;
+  --gold-champagne: #F2DFA7;
+  --gold-leaf: #D8B24C;
+  --gold-deep: #B48B28;
+  --gold-antique: #8A6715;
+  --gold-burnished: #5F4509;
+
+  /* Металдық жез градиенттері */
+  --grad-gold-leaf: linear-gradient(135deg, #FFF5D6 0%, #E7C66B 25%, #C29627 60%, #E8C974 80%, #997316 100%);
+  --grad-brass-plate: linear-gradient(180deg, #FFE8A3 0%, #D4AF37 40%, #AA8220 70%, #684E0C 100%);
+  --grad-wood-rostrum: linear-gradient(180deg, #3D1C12 0%, #2A120B 40%, #1A0905 100%);
+  --grad-burgundy-velvet: radial-gradient(circle at 50% 30%, #6B1321 0%, #460A13 60%, #2B050B 100%);
+  --grad-tote-glass: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0.4) 100%);
+
+  /* Мәтін түстері */
+  --text-dark: #1E120E;
+  --text-antique: #423026;
+  --text-muted: #7A6557;
+  --text-cream: #FAF5EB;
+  --text-gold: #F5DE9B;
+
+  /* Көлеңкелер мен рельефтер (Шынайы көлем) */
+  --shadow-bevel-up: 
+    inset 1px 1px 0px rgba(255, 255, 255, 0.4),
+    inset -1px -1px 0px rgba(0, 0, 0, 0.5),
+    0 4px 12px rgba(18, 9, 6, 0.25);
+  
+  --shadow-brass-frame: 
+    0 0 0 1px #8A6715,
+    0 0 0 3px #F2DFA7,
+    0 0 0 4px #5F4509,
+    0 10px 30px rgba(0, 0, 0, 0.35);
+
+  --shadow-engraved: inset 0 2px 4px rgba(0, 0, 0, 0.7);
+
+  /* Қаріптер */
+  --font-display: "Playfair Display", "Cinzel", "Georgia", "Cambria", serif;
+  --font-body: "Montserrat", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* --------------------------------------------------
+   ЖАЛПЫ БАЗА ЖӘНЕ ФОН
+   -------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100vh;
+  max-height: 100vh;
+  font-family: var(--font-body);
+  background-color: #F8FAFC;
+  color: #0F172A;
+  line-height: 1.4;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Сауда залының жоғары контрастты архитектуралық фоны */
+body {
+  background-color: #F1F5F9;
+  background-image: 
+    radial-gradient(circle at 50% 0px, rgba(30, 58, 138, 0.08) 0%, transparent 60%),
+    linear-gradient(to bottom, #F8FAFC 0%, #EEF2F6 100%);
+  color: #0F172A;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ҚОЮ / ТҮНГІ РЕЖИМ (Dark Theme) */
+body.dark-theme {
+  background-color: #080D1A;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.15) 0%, transparent 65%),
+    linear-gradient(180deg, #0A0F1D 0%, #050811 100%);
+  color: #F8FAFC;
+}
+
+body.dark-theme .lot-display-card {
+  background: #0F172A;
+  border-color: #F59E0B;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme .lot-title-heading,
+body.dark-theme h1, 
+body.dark-theme h2, 
+body.dark-theme h3 {
+  color: #F8FAFC;
+}
+
+body.dark-theme .lot-price-box {
+  background: #1E293B;
+  border-color: #334155;
+}
+
+body.dark-theme .lot-price-box span.val {
+  color: #FDE047;
+}
+
+body.dark-theme .team-card {
+  background: #0F172A;
+  border-color: #334155;
+}
+
+body.dark-theme .team-card-body {
+  background: #0F172A;
+}
+
+body.dark-theme .team-score-val {
+  color: #F8FAFC;
+}
+
+body.dark-theme .btn-step-bid {
+  background: #1E293B;
+  border-color: #475569;
+  color: #F8FAFC;
+}
+
+body.dark-theme .btn-step-bid:hover:not(:disabled) {
+  background: #F59E0B;
+  border-color: #F59E0B;
+  color: #090D1A;
+}
+
+body.dark-theme .modal-card {
+  background: #0F172A;
+  border-color: #F59E0B;
+  color: #F8FAFC;
+}
+
+/* Сілтемелер мен қаріп реңктері */
+h1, h2, h3, h4, .serif-font {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #0F172A;
+}
+
+/* Алтын ойылған мәтін (Gilded Chiseled Text) */
+.gold-embossed {
+  background: var(--grad-gold-leaf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.4));
+}
+
+/* Жез тақтайша тақырыбы (Engraved Brass Plaque) */
+.brass-plaque {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #0F172A;
+  color: #FDE047;
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 2px solid #F59E0B;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.brass-plaque::before,
+.brass-plaque::after {
+  content: "✦";
+  font-size: 0.9rem;
+  color: #F59E0B;
+  line-height: 1;
+}
+
+/* Классикалық сәндік бөлу сызығы (Filigree divider) */
+.filigree-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 18px 0;
+  color: var(--gold-antique);
+}
+
+.filigree-divider::before,
+.filigree-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(to right, transparent, var(--gold-leaf), transparent);
+}
+
+.filigree-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------
+   БАТЫРМАЛАР (Металл, ағаш және жылтыр жез)
+   -------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  text-decoration: none;
+  user-select: none;
+  position: relative;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* 1. Алтын батырма (Gilded Button) */
+.btn-gold {
+  background: var(--grad-brass-plate);
+  color: var(--wood-ebony);
+  border: 1px solid #FFEBB0;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(138, 103, 21, 0.35);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.btn-gold:hover {
+  filter: brightness(1.08);
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.9),
+    0 6px 18px rgba(212, 175, 55, 0.5);
+  transform: translateY(-1px);
+}
+
+/* 2. Корольдік бордо батырмасы (Royal Velvet Button) */
+.btn-burgundy {
+  background: linear-gradient(180deg, #6E121E 0%, #460911 60%, #30050B 100%);
+  color: var(--gold-champagne);
+  border: 1px solid var(--gold-deep);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.6),
+    0 4px 14px rgba(42, 5, 10, 0.45);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.btn-burgundy:hover {
+  background: linear-gradient(180deg, #821725 0%, #540C15 60%, #38070E 100%);
+  border-color: var(--gold-champagne);
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(94, 16, 29, 0.6);
+  transform: translateY(-1px);
+}
+
+/* 3. Ағаш жиектелген батырма (Walnut Button) */
+.btn-wood {
+  background: linear-gradient(180deg, #442217 0%, #29120B 60%, #1A0905 100%);
+  color: var(--gold-champagne);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.6),
+    0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-wood:hover {
+  background: linear-gradient(180deg, #532C1F 0%, #351910 60%, #220E07 100%);
+  border-color: var(--gold-leaf);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* 4. Контурлы батырма */
+.btn-outline {
+  background: rgba(255, 255, 255, 0.4);
+  color: var(--wood-mahogany);
+  border: 1.5px solid var(--wood-mahogany);
+}
+
+.btn-outline:hover {
+  background: var(--wood-mahogany);
+  color: var(--gold-champagne);
+}
+
+/* 5. Шешім қабылдау батырмалары: Дұрыс / Қате */
+.btn-success {
+  background: linear-gradient(180deg, #2E8540 0%, #1E632D 60%, #14441E 100%);
+  color: #FFFFFF;
+  border: 1px solid #57B36C;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.5),
+    0 4px 14px rgba(30, 99, 45, 0.4);
+}
+
+.btn-success:hover {
+  background: linear-gradient(180deg, #389E4E 0%, #257837 60%, #195225 100%);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  background: linear-gradient(180deg, #B52626 0%, #8C1717 60%, #5E0C0C 100%);
+  color: #FFFFFF;
+  border: 1px solid #E05353;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.5),
+    0 4px 14px rgba(140, 23, 23, 0.4);
+}
+
+.btn-danger:hover {
+  background: linear-gradient(180deg, #CE2E2E 0%, #A21D1D 60%, #701010 100%);
+  transform: translateY(-1px);
+}
+
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 0.82rem;
+}
+
+.btn-lg {
+  padding: 14px 30px;
+  font-size: 1.1rem;
+}
+
+/* --------------------------------------------------
+   НАВИГАЦИЯ ЖОЛАҒЫ (Сауда залының жоғарғы фризі)
+   -------------------------------------------------- */
+.auction-header {
+  background: var(--grad-wood-rostrum);
+  border-bottom: 2px solid var(--gold-deep);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    inset 0 -1px 0 #FFF0B8;
+  padding: 8px 24px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 1480px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-crest {
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #4A0B13 0%, #200408 100%);
+  border: 1.5px solid var(--gold-leaf);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    0 3px 8px rgba(0, 0, 0, 0.6);
+  color: var(--gold-champagne);
+}
+
+.brand-titles h1 {
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  color: #FFF2D1;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.brand-titles p {
+  font-size: 0.72rem;
+  color: var(--gold-leaf);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Ықшам құралдар панелі (Header Toolbar) */
+.header-toolbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(18, 9, 6, 0.45);
+  padding: 4px 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(216, 178, 76, 0.25);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.btn-icon-only {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.toolbar-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+/* Лот күйінің индикаторы */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(18, 9, 6, 0.65);
+  border: 1px solid rgba(216, 178, 76, 0.45);
+  border-radius: 20px;
+  font-size: 0.82rem;
+  color: var(--gold-champagne);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3CD070;
+  box-shadow: 0 0 10px #3CD070;
+  animation: pulse-dot 2.5s infinite;
+}
+
+@keyframes pulse-dot {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.7; }
+}
+
+/* Экран дірілі (Балға соққысында) */
+.gavel-screen-shake {
+  animation: gavel-quake 0.28s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes gavel-quake {
+  10%, 90% { transform: translate3d(-1px, -1px, 0); }
+  20%, 80% { transform: translate3d(2px, 1px, 0); }
+  30%, 50%, 70% { transform: translate3d(-3px, -2px, 0); }
+  40%, 60% { transform: translate3d(3px, 2px, 0); }
+}

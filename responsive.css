@@ -1,0 +1,139 @@
+/* ==========================================================================
+   БЕЙІМДЕЛУ (RESPONSIVE & PROJECTOR STYLES)
+   Үлкен экрандар, проекторлар, ноутбуктер және телефондар үшін
+   ========================================================================== */
+
+/* 1. Планшеттер мен орташа экрандар (<= 1100px) */
+@media (max-width: 1100px) {
+  .saleroom-container {
+    max-width: 98%;
+    padding: 6px 12px;
+  }
+}
+
+/* 2. Ұялы телефондар (<= 768px) */
+@media (max-width: 768px) {
+  .auction-header {
+    padding: 6px 12px;
+  }
+
+  .brand-logo-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .brand-titles h1 {
+    font-size: 1.05rem;
+  }
+
+  .brand-titles p {
+    display: none;
+  }
+
+  .toolbar-label {
+    display: none;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .saleroom-container {
+    padding: 6px 10px;
+  }
+
+  .bid-amount-glow {
+    font-size: 2.8rem;
+  }
+
+  .question-text-prominent {
+    font-size: 1.35rem;
+    padding: 12px;
+  }
+
+  .judgment-actions-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .podium-grid {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .podium-box {
+    height: auto !important;
+    padding: 16px;
+    border-radius: var(--radius-md) !important;
+  }
+
+  .podium-col {
+    order: unset !important;
+  }
+
+  .modal-card {
+    max-height: 95vh;
+  }
+
+  .admin-tabs-nav {
+    gap: 4px;
+  }
+
+  .tab-btn {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+/* 3. Проектор / Үлкен экран режимі (.projector-mode) */
+body.projector-mode {
+  font-size: 18px;
+}
+
+body.projector-mode .saleroom-container {
+  max-width: 1750px;
+}
+
+body.projector-mode .lot-title-heading {
+  font-size: 2.5rem;
+}
+
+body.projector-mode .lot-description-teaser {
+  font-size: 1.35rem;
+}
+
+body.projector-mode .bid-amount-glow {
+  font-size: 4.8rem;
+}
+
+body.projector-mode .leading-team-name {
+  font-size: 1.6rem;
+}
+
+body.projector-mode .question-text-prominent {
+  font-size: 2.2rem;
+  line-height: 1.5;
+}
+
+body.projector-mode .timer-seconds-big {
+  font-size: 2.4rem;
+}
+
+body.projector-mode .team-name-title {
+  font-size: 1.35rem;
+}
+
+body.projector-mode .team-score-val {
+  font-size: 2.3rem;
+}
+
+/* Басып шығару (Print) ережесі */
+@media print {
+  .auction-header,
+  .gavel-control-zone,
+  .btn,
+  .modal-overlay,
+  .toast-container {
+    display: none !important;
+  }
+}
