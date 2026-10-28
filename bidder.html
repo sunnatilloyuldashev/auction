@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>«АУКЦИОН» — Қатысушы Пульті</title>
+  <meta name="theme-color" content="#341910">
+
+  <!-- Қаріптер -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-cream: #FAF6EE;
+      --bg-parchment: #F4ECE0;
+      --wood-dark: #1F0D08;
+      --wood-mahogany: #341910;
+      --wood-walnut: #4E271B;
+      --burgundy: #5E101D;
+      --burgundy-deep: #3A080E;
+      --gold-leaf: #D8B24C;
+      --gold-bright: #F7D058;
+      --gold-champagne: #F5E6BE;
+      --text-dark: #1E120E;
+      --text-muted: #7A6557;
+      --font-display: "Playfair Display", Georgia, serif;
+      --font-body: "Montserrat", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-cream);
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(216, 178, 76, 0.15) 0%, transparent 70%),
+        linear-gradient(to bottom, #FAF6EE, #ECE3D2);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    /* Жоғарғы фриз */
+    .mobile-header {
+      background: linear-gradient(180deg, var(--wood-dark) 0%, var(--wood-mahogany) 100%);
+      color: var(--gold-champagne);
+      border-bottom: 2px solid var(--gold-leaf);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-crest {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: var(--burgundy);
+      border: 1px solid var(--gold-leaf);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-champagne);
+    }
+
+    .header-title h1 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      letter-spacing: 0.15em;
+      line-height: 1;
+      color: #FFF2D1;
+    }
+
+    .header-title p {
+      font-size: 0.65rem;
+      color: var(--gold-leaf);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .connection-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid rgba(216, 178, 76, 0.3);
+      font-size: 0.75rem;
+      color: var(--gold-champagne);
+    }
+
+    .conn-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #3CD070;
+      box-shadow: 0 0 8px #3CD070;
+    }
+
+    .conn-dot.disconnected {
+      background: #E05353;
+      box-shadow: 0 0 8px #E05353;
+    }
+
+    /* Негізгі экран аймағы */
+    .mobile-container {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      max-width: 480px;
+      margin: 0 auto;
+      width: 100%;
+      gap: 16px;
+    }
+
+    /* 1-ЭКРАН: Команданы таңдау */
+    .team-select-title {
+      text-align: center;
+      margin: 10px 0 6px;
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--burgundy-deep);
+    }
+
+    .team-select-sub {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .team-grid-select {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .team-pick-btn {
+      background: #FFFDF9;
+      border-radius: 8px;
+      border: 1.5px solid rgba(138, 103, 21, 0.35);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      text-align: left;
+    }
+
+    .team-pick-btn:active {
+      transform: scale(0.98);
+    }
+
+    .team-pick-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .team-pick-score {
+      font-size: 1.15rem;
+      font-weight: 800;
+      font-family: var(--font-display);
+    }
+
+    /* 2-ЭКРАН: Сауда қалақшасы (Бәс тігу пульті) */
+    .paddle-screen {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+
+    /* Жоғарғы команда мәртебесі */
+    .selected-team-banner {
+      background: #FFFDF9;
+      border-radius: 8px;
+      padding: 14px 18px;
+      border: 1.5px solid var(--gold-leaf);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .team-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .team-color-disc {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 0 6px rgba(0,0,0,0.3);
+    }
+
+    .team-banner-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.15rem;
+    }
+
+    .team-banner-capital {
+      font-size: 1.25rem;
+      font-weight: 900;
+      font-family: var(--font-display);
+      color: var(--burgundy);
+    }
+
+    .btn-change-team {
+      background: none;
+      border: none;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-decoration: underline;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    /* Ағымдағы лот пен ставка таблосы */
+    .live-lot-card {
+      background: linear-gradient(180deg, var(--wood-dark) 0%, var(--wood-mahogany) 100%);
+      color: var(--gold-champagne);
+      border-radius: 8px;
+      border: 2px solid var(--gold-leaf);
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      position: relative;
+    }
+
+    .live-lot-number {
+      display: inline-block;
+      background: var(--burgundy);
+      border: 1px solid var(--gold-leaf);
+      padding: 4px 14px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-family: var(--font-display);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .live-lot-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: #FFF2D1;
+      margin-bottom: 14px;
+      line-height: 1.3;
+    }
+
+    .live-bid-caption {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gold-leaf);
+      margin-bottom: 4px;
+    }
+
+    .live-bid-val {
+      font-size: 2.8rem;
+      font-family: var(--font-display);
+      font-weight: 900;
+      color: #FFF9E6;
+      line-height: 1;
+      text-shadow: 0 0 16px rgba(216, 178, 76, 0.6);
+    }
+
+    .live-leading-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.5);
+      border: 1px solid var(--gold-leaf);
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+
+    /* Ставка қадамдары */
+    .steps-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--wood-walnut);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .bid-step-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .mobile-step-btn {
+      background: #FFFDF9;
+      border: 1.5px solid var(--gold-leaf);
+      color: var(--wood-mahogany);
+      border-radius: 6px;
+      padding: 12px 0;
+      font-size: 1rem;
+      font-weight: 800;
+      font-family: var(--font-display);
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      transition: all 0.15s ease;
+    }
+
+    .mobile-step-btn.selected {
+      background: linear-gradient(180deg, #FFE8A3 0%, #D4AF37 100%);
+      color: var(--wood-dark);
+      border-color: #FFFFFF;
+      box-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
+      transform: scale(1.04);
+    }
+
+    /* БАСТЫ БӘС ТІГУ БАТЫРМАСЫ */
+    .big-bid-button {
+      width: 100%;
+      background: linear-gradient(180deg, #FFE8A3 0%, #D4AF37 50%, #A37C1B 100%);
+      color: var(--wood-dark);
+      border: 2px solid #FFF5D6;
+      border-radius: 10px;
+      padding: 20px 16px;
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 
+        0 8px 24px rgba(163, 124, 27, 0.45),
+        inset 0 2px 0 rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      margin-top: auto;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .big-bid-button:active {
+      transform: translateY(2px) scale(0.98);
+      filter: brightness(0.95);
+    }
+
+    .big-bid-button span.sub {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 700;
+      opacity: 0.85;
+    }
+
+    /* Хабарлама таблосы */
+    .mobile-toast {
+      position: fixed;
+      top: 70px;
+      left: 16px;
+      right: 16px;
+      background: #1A0A06;
+      color: var(--gold-champagne);
+      border: 1px solid var(--gold-leaf);
+      padding: 12px 18px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: all 0.25s ease;
+    }
+
+    .mobile-toast.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Жоғарғы фриз -->
+  <header class="mobile-header">
+    <div class="header-brand">
+      <div class="header-crest">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="m14 13-7.5 7.5c-.8.8-2 .8-2.8 0s-.8-2 0-2.8L11.2 10.2"></path>
+          <path d="m9 7 8 8"></path>
+          <path d="m21 11-8-8"></path>
+        </svg>
+      </div>
+      <div class="header-title">
+        <h1>АУКЦИОН</h1>
+        <p>Қатысушы Пульті</p>
+      </div>
+    </div>
+    <div class="connection-badge">
+      <span class="conn-dot" id="conn-dot"></span>
+      <span id="conn-status-text">Онлайн</span>
+    </div>
+  </header>
+
+  <!-- Негізгі Контейнер -->
+  <main class="mobile-container">
+
+    <!-- 1-ЭКРАН: Команданы таңдау -->
+    <div id="screen-team-select">
+      <h2 class="team-select-title">Командаңызды таңдаңыз</h2>
+      <p class="team-select-sub">Сауда жасау үшін өз тобыңызды басыңыз</p>
+      <div class="team-grid-select" id="team-select-container">
+        <!-- JS арқылы салынады -->
+        <p style="text-align:center; padding:20px; color:var(--text-muted);">Командалар жүктелуде...</p>
+      </div>
+    </div>
+
+    <!-- 2-ЭКРАН: Сауда қалақшасы (Бәс тігу) -->
+    <div id="screen-paddle" class="paddle-screen" style="display: none;">
+      <!-- Таңдалған команда мәртебесі -->
+      <div class="selected-team-banner">
+        <div class="team-banner-left">
+          <div class="team-color-disc" id="my-team-color-disc"></div>
+          <div>
+            <div class="team-banner-name" id="my-team-name">«Алаш» тобы</div>
+            <button class="btn-change-team" id="btn-change-team">Команданы ауыстыру</button>
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size:0.7rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Капитал</div>
+          <div class="team-banner-capital" id="my-team-score">1 000 ₸</div>
+        </div>
+      </div>
+
+      <!-- Ағымдағы сұрақ таблосы -->
+      <div class="live-lot-card">
+        <div class="live-lot-number" id="live-lot-num">СҰРАҚ № 1</div>
+        <div class="live-lot-title" id="live-lot-title">Сұрақ күтілуде...</div>
+
+        <div class="live-bid-caption">Ағымдағы ставка</div>
+        <div class="live-bid-val" id="live-bid-amount">100</div>
+
+        <div class="live-leading-badge" id="live-leading-badge">
+          <span>Көшбасшы:</span>
+          <strong id="live-leading-name">—</strong>
+        </div>
+      </div>
+
+      <!-- Ставка қосу қадамы -->
+      <div>
+        <span class="steps-label">Ставка көтеру қадамы:</span>
+        <div class="bid-step-grid">
+          <button class="mobile-step-btn" data-step="50">+50</button>
+          <button class="mobile-step-btn selected" data-step="100">+100</button>
+          <button class="mobile-step-btn" data-step="200">+200</button>
+          <button class="mobile-step-btn" data-step="500">+500</button>
+        </div>
+      </div>
+
+      <!-- БАСТЫ БӘС ТІГУ БАТЫРМАСЫ -->
+      <button class="big-bid-button" id="btn-submit-bid">
+        <span id="btn-bid-main-text">БӘС ТІГУ (+100 ₸)</span>
+        <span class="sub" id="btn-bid-sub-text">Жаңа ставка: 200 ұпай</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- Тост хабарлама -->
+  <div class="mobile-toast" id="mobile-toast">Ставка қабылданды!</div>
+
+  <script>
+    (function() {
+      let currentSelectedTeam = null;
+      let currentStep = 100;
+      let gameState = {
+        currentLot: { lotNumber: 1, title: 'Аукцион сұрағы' },
+        currentBid: 100,
+        leadingTeamId: null,
+        leadingTeamName: null,
+        teams: [
+          { id: 'team-1', name: '«Алаш» тобы', color: '#DC2626', score: 1000 },
+          { id: 'team-2', name: '«Тұран» тобы', color: '#059669', score: 1000 },
+          { id: 'team-3', name: '«Барыс» тобы', color: '#2563EB', score: 1000 },
+          { id: 'team-4', name: '«Сұңқар» тобы', color: '#D97706', score: 1000 }
+        ]
+      };
+
+      // Жергілікті сақталған команданы оқу
+      const savedTeamId = localStorage.getItem('MY_AUCTION_TEAM_ID');
+
+      // 1. SSE арқылы негізгі экранмен байланысу
+      let evtSource = null;
+      function connectSSE() {
+        try {
+          evtSource = new EventSource('/api/events');
+
+          evtSource.addEventListener('state_sync', (e) => {
+            try {
+              const data = JSON.parse(e.data);
+              if (data) {
+                if (data.teams && data.teams.length > 0) gameState.teams = data.teams;
+                if (data.currentBid !== undefined) gameState.currentBid = data.currentBid;
+                if (data.currentLot) gameState.currentLot = data.currentLot;
+                if (data.leadingTeamName !== undefined) gameState.leadingTeamName = data.leadingTeamName;
+                if (data.leadingTeamId !== undefined) gameState.leadingTeamId = data.leadingTeamId;
+                updateUI();
+              }
+            } catch (err) {}
+          });
+
+          evtSource.addEventListener('incoming_bid', (e) => {
+            try {
+              const data = JSON.parse(e.data);
+              if (data && data.bid) {
+                gameState.currentBid = data.bid;
+                gameState.leadingTeamId = data.teamId;
+                gameState.leadingTeamName = data.teamName || gameState.leadingTeamName;
+                updateUI();
+                vibrate([30]);
+              }
+            } catch (err) {}
+          });
+
+          evtSource.onopen = () => {
+            document.getElementById('conn-dot').classList.remove('disconnected');
+            document.getElementById('conn-status-text').textContent = 'Онлайн';
+          };
+
+          evtSource.onerror = () => {
+            document.getElementById('conn-dot').classList.add('disconnected');
+            document.getElementById('conn-status-text').textContent = 'Үзілді';
+          };
+        } catch (e) {
+          console.warn('SSE қолдау таппады, дербес режим');
+        }
+      }
+
+      // Вибрация
+      function vibrate(pattern) {
+        if (navigator.vibrate) {
+          try { navigator.vibrate(pattern); } catch (e) {}
+        }
+      }
+
+      // UI Жаңарту
+      function updateUI() {
+        renderTeamSelect();
+
+        // Егер команда таңдалған болса — қалақшаны жаңарту
+        if (currentSelectedTeam) {
+          // Команданың соңғы ұпайын синхрондау
+          const fresh = gameState.teams.find(t => t.id === currentSelectedTeam.id);
+          if (fresh) currentSelectedTeam = fresh;
+
+          document.getElementById('my-team-name').textContent = currentSelectedTeam.name;
+          document.getElementById('my-team-score').textContent = (currentSelectedTeam.score || 0).toLocaleString() + ' ₸';
+          document.getElementById('my-team-color-disc').style.backgroundColor = currentSelectedTeam.color;
+
+          if (gameState.currentLot) {
+            document.getElementById('live-lot-num').textContent = `СҰРАҚ № ${gameState.currentLot.lotNumber || 1}`;
+            document.getElementById('live-lot-title').textContent = gameState.currentLot.title || 'Сұрақ';
+          }
+
+          document.getElementById('live-bid-amount').textContent = gameState.currentBid.toLocaleString();
+          document.getElementById('live-leading-name').textContent = gameState.leadingTeamName || '—';
+
+          const newTotalBid = gameState.currentBid + currentStep;
+          document.getElementById('btn-bid-main-text').textContent = `БӘС ТІГУ (+${currentStep} ₸)`;
+          document.getElementById('btn-bid-sub-text').textContent = `Жаңа ұсыныс: ${newTotalBid.toLocaleString()} ұпай`;
+        }
+      }
+
+      // Команда таңдау экранын салу
+      function renderTeamSelect() {
+        const container = document.getElementById('team-select-container');
+        if (!container) return;
+
+        container.innerHTML = gameState.teams.map(team => `
+          <button class="team-pick-btn" data-pick-team="${team.id}" style="border-left: 6px solid ${team.color};">
+            <div>
+              <div class="team-pick-name">${team.name}</div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Капитал қоры:</div>
+            </div>
+            <div class="team-pick-score" style="color:${team.color};">${(team.score || 1000).toLocaleString()} ₸</div>
+          </button>
+        `).join('');
+
+        // Тыңдаушыларды байлау
+        container.querySelectorAll('[data-pick-team]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const teamId = btn.getAttribute('data-pick-team');
+            selectTeam(teamId);
+          });
+        });
+      }
+
+      function selectTeam(teamId) {
+        const team = gameState.teams.find(t => t.id === teamId);
+        if (!team) return;
+
+        currentSelectedTeam = team;
+        localStorage.setItem('MY_AUCTION_TEAM_ID', team.id);
+
+        document.getElementById('screen-team-select').style.display = 'none';
+        document.getElementById('screen-paddle').style.display = 'flex';
+        vibrate([50]);
+        updateUI();
+        showToast(`«${team.name}» ретінде қосылдыңыз!`);
+      }
+
+      // Команданы ауыстыру
+      document.getElementById('btn-change-team').addEventListener('click', () => {
+        document.getElementById('screen-paddle').style.display = 'none';
+        document.getElementById('screen-team-select').style.display = 'block';
+      });
+
+      // Қадамды таңдау (+50, +100, +200, +500)
+      document.querySelectorAll('.mobile-step-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.mobile-step-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          currentStep = Number(btn.getAttribute('data-step')) || 100;
+          vibrate([20]);
+          updateUI();
+        });
+      });
+
+      // Ставка жіберу
+      document.getElementById('btn-submit-bid').addEventListener('click', async () => {
+        if (!currentSelectedTeam) return;
+
+        const newBid = gameState.currentBid + currentStep;
+
+        // Капитал тексеру
+        if (currentSelectedTeam.score < newBid) {
+          showToast(`Капитал жеткіліксіз! Бар болғаны: ${currentSelectedTeam.score} ₸`);
+          vibrate([100, 50, 100]);
+          return;
+        }
+
+        vibrate([60, 40, 90]);
+        showToast(`Ставка ұсынылды: ${newBid.toLocaleString()} ₸!`);
+
+        try {
+          // 1. Серверге жіберу
+          await fetch('/api/bid', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              teamId: currentSelectedTeam.id,
+              teamName: currentSelectedTeam.name,
+              delta: currentStep,
+              bid: newBid
+            })
+          });
+        } catch (e) {
+          // Егер локал сервер болмаса, BroadcastChannel арқылы тексеру
+          try {
+            const bc = new BroadcastChannel('AUCTION_SYNC_CHANNEL');
+            bc.postMessage({
+              type: 'INCOMING_BID',
+              teamId: currentSelectedTeam.id,
+              teamName: currentSelectedTeam.name,
+              delta: currentStep,
+              bid: newBid
+            });
+            bc.close();
+          } catch (err) {}
+        }
+      });
+
+      // Тост
+      function showToast(text) {
+        const t = document.getElementById('mobile-toast');
+        if (!t) return;
+        t.textContent = text;
+        t.classList.add('visible');
+        setTimeout(() => t.classList.remove('visible'), 2800);
+      }
+
+      // Іске қосу
+      connectSSE();
+      renderTeamSelect();
+
+      // Егер бұрын команда таңдалған болса — автоматты ашу
+      if (savedTeamId) {
+        selectTeam(savedTeamId);
+      }
+    })();
+  </script>
+</body>
+</html>

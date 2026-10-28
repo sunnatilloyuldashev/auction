@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>«АУКЦИОН» — Интерактивті Зияткерлік Сауда Ойыны</title>
+  <meta name="description" content="Қазақ тіліндегі интерактивті зияткерлік топтық аукцион ойыны. Мұғалімдер мен жүргізушілерге арналған толыққанды білім сайысы.">
+  <meta name="theme-color" content="#430B12">
+
+  <!-- Қаріптер: Google Fonts (Playfair Display & Montserrat) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&display=swap" rel="stylesheet">
+
+  <!-- Стильдер -->
+  <link rel="stylesheet" href="css/auction-theme.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Басты Навигациялық Тақырып (Header) -->
+  <header class="auction-header">
+    <div class="header-container">
+      <div class="brand-wrapper">
+        <div class="brand-crest" title="Аукцион Сауда Палатасы">
+          <!-- Классикалық Аукцион Балғасының Векторлық Елтаңбасы -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m14 13-7.5 7.5c-.8.8-2 .8-2.8 0s-.8-2 0-2.8L11.2 10.2"></path>
+            <path d="m16 16 3-3"></path>
+            <path d="m8 8 3-3"></path>
+            <path d="m9 7 8 8"></path>
+            <path d="m21 11-8-8"></path>
+          </svg>
+        </div>
+        <div class="brand-titles">
+          <h1 class="serif-font">АУКЦИОН</h1>
+          <p>Интерактивті Сауда Сарайы</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Ағымдағы сұрақ көрсеткіші -->
+        <div id="round-indicator" class="status-pill">
+          <span class="status-dot"></span>
+          Сұрақ: <strong>1 / 8</strong>
+        </div>
+
+        <!-- Телефонмен қатысу (QR) - Басты батырма -->
+        <button id="btn-open-qr-modal" class="btn btn-gold btn-sm" title="Телефонмен қатысу үшін QR-кодты ашу">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Телефонмен қатысу (QR)</span>
+        </button>
+
+        <!-- Ықшам құралдар панелі -->
+        <div class="header-toolbar">
+          <!-- Сауда шежіресі -->
+          <button id="btn-open-history" class="btn btn-wood btn-sm" title="Сауда шежіресі мен тарихы">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span class="toolbar-label">Шежіре</span>
+          </button>
+
+          <!-- Дыбыс батырмасы -->
+          <button id="btn-sound-toggle" class="btn btn-wood btn-icon-only" title="Дыбысты қосу/өшіру">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+          </button>
+
+          <!-- Проектор режимі -->
+          <button id="btn-projector-toggle" class="btn btn-wood btn-icon-only" title="Проектор / Үлкен экран режимі">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+          </button>
+
+          <!-- Жарық / Қараңғы стиль (Контраст) -->
+          <button id="btn-theme-toggle" class="btn btn-wood btn-icon-only" title="Жарық / Қараңғы режимді ауыстыру">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </button>
+
+          <!-- Ойын ережесі -->
+          <button id="btn-open-rules" class="btn btn-wood btn-icon-only" title="Ойын ережелері">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+          </button>
+
+          <!-- Мұғалім панелі -->
+          <button id="btn-open-admin" class="btn btn-wood btn-sm" title="Мұғалімнің басқару бөлмесі">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            <span class="toolbar-label">Мұғалім</span>
+          </button>
+
+          <!-- Жаңа ойын -->
+          <button id="btn-new-game" class="btn btn-burgundy btn-icon-only" title="Жаңа ойын бастау (Ұпайларды қайтару)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"></path></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Негізгі Сауда Залы (Кең, еркін бір бағанды арена) -->
+  <main class="saleroom-container">
+    <section class="main-stage" id="main-stage-container">
+      <div style="text-align: center; padding: 60px; color: var(--wood-warm); font-family: var(--font-display);">
+        <p style="font-size: 1.2rem; letter-spacing: 0.08em;">Аукцион залы дайындалуда...</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Телефонмен Қатысу QR-код Модалі (Projector Full-Screen QR Modal) -->
+  <div id="phone-qr-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 580px; text-align: center;">
+      <div class="modal-header">
+        <h3 class="modal-title serif-font gold-embossed">Телефонмен Саудаға Қосылу</h3>
+        <button class="modal-close-btn modal-close-trigger" title="Жабу">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 30px 24px; display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <p style="font-size: 1.05rem; color: var(--wood-walnut); font-weight: 600;">
+          Телефон камерасын QR-кодқа бағыттап, өз командаңыздың сауда қалақшасын ашыңыз!
+        </p>
+
+        <!-- QR-код салатын Canvas -->
+        <div style="background: #FFFFFF; padding: 16px; border-radius: 8px; border: 2px solid var(--gold-leaf); box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+          <canvas id="projector-qr-canvas"></canvas>
+        </div>
+
+        <div style="background: #F7F1E6; padding: 12px 18px; border-radius: 6px; border: 1px solid rgba(138,103,21,0.3); width: 100%;">
+          <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); display: block; margin-bottom: 2px;">Тікелей сілтеме:</span>
+          <strong id="projector-qr-link-text" style="font-size: 1.15rem; color: var(--burgundy); font-family: var(--font-display); word-break: break-all;"></strong>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4;">
+          Команда мүшелері телефон арқылы өз тобын таңдап, бәссаудада ставканы тікелей телефоннан көтере алады.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Мұғалім Басқару Панелі (Admin Modal Dialog) -->
+  <div id="admin-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title serif-font gold-embossed">Мұғалімнің Басқару Бөлмесі</h3>
+        <button class="modal-close-btn modal-close-trigger" title="Жабу">&times;</button>
+      </div>
+
+      <!-- Табтар -->
+      <nav class="admin-tabs-nav">
+        <button class="tab-btn admin-tab-btn active" data-tab="questions">
+          Сұрақтар мен Лоттар
+        </button>
+        <button class="tab-btn admin-tab-btn" data-tab="teams">
+          Командаларды баптау
+        </button>
+        <button class="tab-btn admin-tab-btn" data-tab="settings">
+          Ойын параметрлері
+        </button>
+        <button class="tab-btn admin-tab-btn" data-tab="backup">
+          Деректер және QR-код
+        </button>
+      </nav>
+
+      <!-- Модаль ішкі мазмұны -->
+      <div class="modal-body" id="admin-modal-body">
+      </div>
+    </div>
+  </div>
+
+  <!-- Ойын Ережелерінің Модалі -->
+  <div id="rules-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 class="modal-title serif-font gold-embossed">«Аукцион» сауда ережелері</h3>
+        <button class="modal-close-btn modal-close-trigger" title="Жабу">&times;</button>
+      </div>
+      <div class="modal-body" id="rules-modal-body" style="padding: 28px;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Сауда Шежіресінің Модалі (Тарих) -->
+  <div id="history-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 class="modal-title serif-font gold-embossed">Сауда шежіресі мен тарихы</h3>
+        <button class="modal-close-btn modal-close-trigger" title="Жабу">&times;</button>
+      </div>
+      <div class="modal-body" id="history-modal-body" style="padding: 24px; max-height: 60vh; overflow-y: auto;">
+      </div>
+    </div>
+  </div>
+
+  <!-- Жеңімпаздарға арналған Конфетти кенебі -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Тост хабарламалар контейнері -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Скрипттер -->
+  <script src="js/qrcode.min.js"></script>
+  <script src="js/auction-game.bundle.js"></script>
+</body>
+</html>
